@@ -1,0 +1,41 @@
+{
+    "name": "PHPix",
+    "homepage": "https://www.oertecnologia.com.br/phpix",
+    "description": "Componente para apoio de implementação de rotinas que utilizem o serviço PIX do Banco Central do Brasil.",
+    "type": "library",
+    "keywords": [
+        "pix",
+        "php",
+        "oer"
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "PHPix\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "ext-zlib": "*"
+    },
+    "authors": [
+        {
+            "name": "Luiz Olivetti",
+            "email": "luiz@oertecnologia.com.br",
+            "homepage": "http://www.oertecnologia.com.br"
+        },
+        {
+            "name": "Ricardo Gama",
+            "email": "cazuza@gmail.com",
+            "homepage": "http://www.oertecnologia.com.br"
+        }
+    ],
+    "require-dev": {
+
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PHPix\\": "tests/"
+        }
+    }
+}
