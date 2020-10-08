@@ -53,4 +53,12 @@ namespace PHPix;
 class InfractionReport
 {
 
+    /**
+    *
+    */
+    public function __construct()
+    {
+
+    }
+
 }

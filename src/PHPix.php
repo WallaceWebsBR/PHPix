@@ -28,4 +28,12 @@ namespace PHPix;
 class PHPix
 {
 
+  /**
+  *
+  */
+  public function __construct()
+  {
+
+  }
+
 }

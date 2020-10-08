@@ -55,3 +55,15 @@ namespace PHPix;
  *    https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address
  *  ---------------------------------------------------------------------------
  */
+ class PHPixException extends \Exception
+ {
+
+   /**
+   *
+   */
+   public function __construct()
+   {
+
+   }
+   
+}

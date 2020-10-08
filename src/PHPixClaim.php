@@ -80,3 +80,15 @@ namespace PHPix;
  *    https://www.bcb.gov.br/content/estabilidadefinanceira/pix/API_do_DICT-v1.0.html#tag/Claim
  *  ---------------------------------------------------------------------------
  */
+ class PHPixClaim
+ {
+
+   /**
+   *
+   */
+   public function __construct()
+   {
+
+   }
+
+}

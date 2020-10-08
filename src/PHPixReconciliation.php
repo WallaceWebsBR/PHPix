@@ -65,87 +65,96 @@ namespace PHPix;
  class Reconciliation
  {
 
- /**
-  * ---------------------------------------------------------------------------
-  * Função calculateCID
-  * ---------------------------------------------------------------------------
-  * Cálculo de CID
-  * O CID é calculado da seguinte forma:
-  * ---------------------------------------------------------------------------
-  * Fonte:
-  * https://www.bcb.gov.br/content/estabilidadefinanceira/pix/API_do_DICT-v1.0.html#section/Calculo-de-CID
-  * ---------------------------------------------------------------------------
-  * entryAttributes = keyType "&" key "&" ownerTaxIdNumber "&" ownerName "&" ownerTradeName "&" participant "&" branch "&" accountNumber "&" accountType
-  * cidBytes = hmacSha256(requestIdBytes, entryAttributes)
-  * cid = lowercase-hexadecimal(cidBytes)
-  *
-  * Observações:
-  *
-  * [entryAttributes] é uma string construída pela junção dos atributos essenciais
-  * do vínculo, separados por &. Todos atributos são strings codificadas em UTF-8.
-  * Atributos nulos são codificados com string em branco, "".
-  *
-  * [hmacSha256] é a função HMAC baseada na função de hash SHA-256.
-  *
-  * [requestIdBytes] são 16 bytes aleatórios, gerados para identificar a
-  * requisição que cria o vínculo, usado como chave na função hmacSha256.
-  *
-  * [cid] é a representação hexadecimal, em lowercase, do resultado da
-  * função hmacSha256.
-  *
-  * Exemplo
-  * entryAttributes = 'PHONE&+5511987654321&11122233300&João Silva&&12345678&00001&0007654321&CACC'
-  * requestIdBytes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
-  * cid = '28c06eb41c4dc9c3ae114831efcac7446c8747777fca8b145ecd31ff8480ae88'
-  *
-  * ---------------------------------------------------------------------------
-  * @param entryAttributes
-  * @param hmacSha256
-  * @param requestIdBytes
-  * @param cid
-  * ---------------------------------------------------------------------------
-  */
-  function calculateCID()
-  {
 
-  }
+    /**
+    *
+    */
+    public function __construct()
+    {
 
-  /**
-   * ---------------------------------------------------------------------------
-   * Função calculateVSync
-   * ---------------------------------------------------------------------------
-   * Cálculo de VSync
-   * O VSync é resultado da aplicação de bitwise-XOR ('OU' exclusivo bit-a-bit)
-   * sobre todos os CIDs de um determinado tipo de chave.
-   * ---------------------------------------------------------------------------
-   * Fonte:
-   * https://www.bcb.gov.br/content/estabilidadefinanceira/pix/API_do_DICT-v1.0.html#section/Calculo-do-VSync
-   * ---------------------------------------------------------------------------
-   *
-   * Exemplo
-   * cids = ['28c06eb41c4dc9c3ae114831efcac7446c8747777fca8b145ecd31ff8480ae88',
-   *        '4d4abb9168114e349672b934d16ed201a919cb49e28b7f66a240e62c92ee007f',
-   *        'fce514f84f37934bc8aa0f861e4f7392273d71b9d18e8209d21e4192a7842058']
-   *
-   * vsync = xor(xor(cids[0], cids[1]), cids[2])  = '996fc1dd3b6b14bcf0c9fe8320eb66d7e2a3fd874ccf767b2e939641b1ea8eaf'
-   *
-   * Observações:
-   * VSync para um conjunto vazio de CIDs é definido como
-   * '0000000000000000000000000000000000000000000000000000000000000000'.
-   * Há três CIDs no exemplo acima, representados em hexadecimal. A operação
-   * bitwise-XOR é feita com os CIDs em formato binário.
-   * bitwise-XOR é comutativo, não importa a ordem da sua aplicação.
-   * Para calcular o novo VSync resultante da adição de um CID ao conjunto,
-   * basta calcular o XOR desse CID com o VSync atual. O novo VSync resultante
-   * da remoção de um CID é calculado da mesma forma.
-   * ---------------------------------------------------------------------------
-   * @param vsync
-   * @param cids
-   * ---------------------------------------------------------------------------
-   */
-   function calculateVSync()
-   {
+    }
 
-   }
-   
- }
+   /**
+    * ---------------------------------------------------------------------------
+    * Função calculateCID
+    * ---------------------------------------------------------------------------
+    * Cálculo de CID
+    * O CID é calculado da seguinte forma:
+    * ---------------------------------------------------------------------------
+    * Fonte:
+    * https://www.bcb.gov.br/content/estabilidadefinanceira/pix/API_do_DICT-v1.0.html#section/Calculo-de-CID
+    * ---------------------------------------------------------------------------
+    * entryAttributes = keyType "&" key "&" ownerTaxIdNumber "&" ownerName "&" ownerTradeName "&" participant "&" branch "&" accountNumber "&" accountType
+    * cidBytes = hmacSha256(requestIdBytes, entryAttributes)
+    * cid = lowercase-hexadecimal(cidBytes)
+    *
+    * Observações:
+    *
+    * [entryAttributes] é uma string construída pela junção dos atributos essenciais
+    * do vínculo, separados por &. Todos atributos são strings codificadas em UTF-8.
+    * Atributos nulos são codificados com string em branco, "".
+    *
+    * [hmacSha256] é a função HMAC baseada na função de hash SHA-256.
+    *
+    * [requestIdBytes] são 16 bytes aleatórios, gerados para identificar a
+    * requisição que cria o vínculo, usado como chave na função hmacSha256.
+    *
+    * [cid] é a representação hexadecimal, em lowercase, do resultado da
+    * função hmacSha256.
+    *
+    * Exemplo
+    * entryAttributes = 'PHONE&+5511987654321&11122233300&João Silva&&12345678&00001&0007654321&CACC'
+    * requestIdBytes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+    * cid = '28c06eb41c4dc9c3ae114831efcac7446c8747777fca8b145ecd31ff8480ae88'
+    *
+    * ---------------------------------------------------------------------------
+    * @param entryAttributes
+    * @param hmacSha256
+    * @param requestIdBytes
+    * @param cid
+    * ---------------------------------------------------------------------------
+    */
+    private function calculateCID()
+    {
+
+    }
+
+    /**
+     * ---------------------------------------------------------------------------
+     * Função calculateVSync
+     * ---------------------------------------------------------------------------
+     * Cálculo de VSync
+     * O VSync é resultado da aplicação de bitwise-XOR ('OU' exclusivo bit-a-bit)
+     * sobre todos os CIDs de um determinado tipo de chave.
+     * ---------------------------------------------------------------------------
+     * Fonte:
+     * https://www.bcb.gov.br/content/estabilidadefinanceira/pix/API_do_DICT-v1.0.html#section/Calculo-do-VSync
+     * ---------------------------------------------------------------------------
+     *
+     * Exemplo
+     * cids = ['28c06eb41c4dc9c3ae114831efcac7446c8747777fca8b145ecd31ff8480ae88',
+     *        '4d4abb9168114e349672b934d16ed201a919cb49e28b7f66a240e62c92ee007f',
+     *        'fce514f84f37934bc8aa0f861e4f7392273d71b9d18e8209d21e4192a7842058']
+     *
+     * vsync = xor(xor(cids[0], cids[1]), cids[2])  = '996fc1dd3b6b14bcf0c9fe8320eb66d7e2a3fd874ccf767b2e939641b1ea8eaf'
+     *
+     * Observações:
+     * VSync para um conjunto vazio de CIDs é definido como
+     * '0000000000000000000000000000000000000000000000000000000000000000'.
+     * Há três CIDs no exemplo acima, representados em hexadecimal. A operação
+     * bitwise-XOR é feita com os CIDs em formato binário.
+     * bitwise-XOR é comutativo, não importa a ordem da sua aplicação.
+     * Para calcular o novo VSync resultante da adição de um CID ao conjunto,
+     * basta calcular o XOR desse CID com o VSync atual. O novo VSync resultante
+     * da remoção de um CID é calculado da mesma forma.
+     * ---------------------------------------------------------------------------
+     * @param vsync
+     * @param cids
+     * ---------------------------------------------------------------------------
+     */
+     private function calculateVSync()
+     {
+
+     }
+
+}
