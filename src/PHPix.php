@@ -23,19 +23,9 @@
 namespace PHPix;
 
 /**
- * Base exception class for the PHPix package.
+ * Base class for the PHPix package.
  */
-class PHPixException extends \Exception
+class PHPix
 {
-
-  /**
-   * Prettify error message output.
-   *
-   * @return string
-   */
-  public function errorMessage()
-  {
-      return htmlspecialchars($this->getMessage());
-  }
 
 }

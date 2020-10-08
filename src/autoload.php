@@ -20,7 +20,6 @@
  |          Ricardo Gama <cazuza@oertecnolgia.com.br>                     |
  +------------------------------------------------------------------------+
 */
-
 spl_autoload_register(function ($class) {
     if (strpos($class, 'PHPix\\') === 0) {
         $filename = str_replace('\\', DIRECTORY_SEPARATOR, substr($class, 14)) . '.php';
