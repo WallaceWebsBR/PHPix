@@ -12,8 +12,7 @@ Componente para apoio de implementação de rotinas que utilizem o serviço PIX 
 ## Dependências
 
 ### Banco central
-Orientações gerais do banco central sobre o Pix
-https://www.bcb.gov.br/estabilidadefinanceira/pagamentosinstantaneos
+Orientações gerais do banco central sobre o Pix [ https://www.bcb.gov.br/estabilidadefinanceira/pagamentosinstantaneos ]
 
 ### DICT API 
 https://www.bcb.gov.br/content/estabilidadefinanceira/pix/API_do_DICT-v1.0.html
