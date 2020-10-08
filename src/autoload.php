@@ -17,17 +17,22 @@
  | @license   http://opensource.org/licenses/mit-license The MIT License  |
  +------------------------------------------------------------------------+
  | Authors: Luiz Olivetti <luiz@oertecnologia.com.br>                     |
- |          Ricardo Gama <ricard.gama@gmail.com>                     |
+ |          Ricardo Gama <ricard.gama@gmail.com>                          |
  +------------------------------------------------------------------------+
 */
-spl_autoload_register(function ($class) {
-    if (strpos($class, 'PHPix\\') === 0) {
-        $filename = str_replace('\\', DIRECTORY_SEPARATOR, substr($class, 14)) . '.php';
+spl_autoload_register(function ($class)
+{
+        $filename = str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
         $fullpath = __DIR__ . DIRECTORY_SEPARATOR . $filename;
 
         if (is_file($fullpath)) {
             /** @noinspection PhpIncludeInspection */
-            require_once $fullpath;
+            include_once $fullpath;
+        } else {
+            throw new InvalidArgumentException(sprintf(
+                'Can\'t load custom autoload file located at %s',
+                $fullpath
+            ));
         }
-    }
+
 });

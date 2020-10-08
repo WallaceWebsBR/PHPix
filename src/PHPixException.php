@@ -17,7 +17,7 @@
  | @license   http://opensource.org/licenses/mit-license The MIT License  |
  +------------------------------------------------------------------------+
  | Authors: Luiz Olivetti <luiz@oertecnologia.com.br>                     |
- |          Ricardo Gama <ricard.gama@gmail.com>                     |
+ |          Ricardo Gama <ricard.gama@gmail.com>                          |
  +------------------------------------------------------------------------+
 */
 namespace PHPix;

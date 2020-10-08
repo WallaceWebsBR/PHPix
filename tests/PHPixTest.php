@@ -20,47 +20,17 @@
  |          Ricardo Gama <ricard.gama@gmail.com>                          |
  +------------------------------------------------------------------------+
 */
-namespace PHPix;
+use PHPUnit\Framework\TestCase;
 
 /**
- * DICT API (1.0.0)
- * OpenAPI specification
  *
- * Suporte TI BCB: suporte.ti@bcb.gov.br
- * URL: https://www.bcb.gov.br/estabilidadefinanceira/pagamentosinstantaneos
- * License: Apache 2.0
- *
- * O Diretório de Identificadores de Contas Transacionais - DICT - é o serviço
- * do arranjo Pix que permite buscar detalhes de contas transacionais com chaves
- * de endereçamento mais convenientes para quem faz um pagamento. Entre os tipos
- * de chave atualmente disponíveis estão CPF, CNPJ, telefone, e-mail e EVP. As
- * informações retornadas pelo DICT permitem ao pagador confirmar a identidade
- * do recebedor, proporcionando uma experiência mais fácil e segura. Permitem
- * também ao PSP do pagador criar a  *  * mensagem de instrução de pagamento a
- * ser enviada para o sistema de liquidação com os detalhes de conta do
- * recebedor.
  */
-class PHPix
+class PHPixTest extends TestCase
 {
-
-  /**
-   * PHPix version
-   *
-   * @string
-   */
-  const VERSION = "1.0-alpha";
-
-  /**
-  *
-  */
-  public function __construct()
-  {
-
-  }
-
-  public static function getVersion()
-  {
-    return self::VERSION;
-  }
+    public function testReturnVersion()
+    {
+        $this->expectOutputString(PHPix\PHPix::getVersion());
+        print PHPix\PHPix::getVersion();
+    }
 
 }

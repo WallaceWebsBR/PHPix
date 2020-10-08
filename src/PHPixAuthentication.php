@@ -17,6 +17,45 @@
  | @license   http://opensource.org/licenses/mit-license The MIT License  |
  +------------------------------------------------------------------------+
  | Authors: Luiz Olivetti <luiz@oertecnologia.com.br>                     |
- |          Ricardo Gama <cazuza@oertecnolgia.com.br>                     |
+ |          Ricardo Gama <ricard.gama@gmail.com>                          |
  +------------------------------------------------------------------------+
 */
+namespace PHPix;
+
+/**
+ * ------------------------------------------------------------------------
+ * Autenticação
+ * ------------------------------------------------------------------------
+ * O DICT utiliza autenticação mútua TLS.
+ *
+ * As definições de autenticação para essa API estão especificadas no manual de
+ * segurança do Pix.
+ *
+ * Assinatura digital
+ *
+ * Requisições que incluam ou alterem informações no DICT devem ser assinadas
+ * com XML Digital Signature pelo participante que envia a requisição.
+ * Requisições de consulta não precisam ser assinadas. Respostas retornadas pelo
+ * DICT serão assinadas digitalmente. As assinaturas devem ser validadas pelos
+ * clientes da API.
+ *
+ * A assinatura será colocada no elemento Signature das requisições e respostas.
+ * O Signature será envelopado pelo XML que está sendo assinado (assinatura é um
+ * elemento filho).
+ *
+ * Para mais detalhes sobre a forma de construir a assinatura, consulte o manual
+ * de segurança do Pix
+ *
+ **/
+class PHPixAuthentication
+{
+
+  /**
+  *
+  */
+  public function __construct()
+  {
+
+  }
+
+}
