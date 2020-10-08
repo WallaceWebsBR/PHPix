@@ -17,13 +17,18 @@
  | @license   http://opensource.org/licenses/mit-license The MIT License  |
  +------------------------------------------------------------------------+
  | Authors: Luiz Olivetti <luiz@oertecnologia.com.br>                     |
- |          Ricardo Gama <cazuza@oertecnolgia.com.br>                     |
+ |          Ricardo Gama <ricard.gama@gmail.com>                     |
  +------------------------------------------------------------------------+
 */
 namespace PHPix;
 
 /**
- * Base class for the PHPix package.
+ * Uses
+ */
+
+
+/**
+ * Main class
  */
 class PHPix
 {

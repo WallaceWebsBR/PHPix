@@ -17,7 +17,7 @@
  | @license   http://opensource.org/licenses/mit-license The MIT License  |
  +------------------------------------------------------------------------+
  | Authors: Luiz Olivetti <luiz@oertecnologia.com.br>                     |
- |          Ricardo Gama <cazuza@oertecnolgia.com.br>                     |
+ |          Ricardo Gama <ricard.gama@gmail.com>                     |
  +------------------------------------------------------------------------+
 */
 spl_autoload_register(function ($class) {
