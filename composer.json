@@ -28,6 +28,11 @@
             "name": "Ricardo Gama",
             "email": "ricard.gama@gmail.com",
             "homepage": "http://www.oertecnologia.com.br"
+        },
+        {
+            "name": "Rico Olivetti",
+            "email": "henrique@oertecnologia.com.br",
+            "homepage": "http://www.oertecnologia.com.br"
         }
     ],
     "require-dev": {
