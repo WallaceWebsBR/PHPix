@@ -23,6 +23,13 @@
 namespace PHPix;
 
 /**
+ * Uses
+ */
+use PHPix\PHPixException;
+use PHPix\PHPixAuthentication;
+use PHPix\PHPixEnvironment;
+
+/**
  * DICT API (1.0.0)
  * OpenAPI specification
  *
@@ -44,23 +51,153 @@ class PHPix
 {
 
   /**
-   * PHPix version
+   * PIX version
    *
    * @string
    */
-  const VERSION = "1.0-alpha";
+  private $VERSION = "v1";
+
+  /**
+   *
+   * @var string
+   */
+  private $baseUrl = '';
+
+  /**
+   * PHPix constructor.
+   *
+   * @param Credential $credential
+   * @throws Exception
+   */
+  function __construct(PHPixAuthentication $credential, $version)
+  {
+      // versão do PIX
+      $this->VERSION = DIRECTORY_SEPARATOR.$version.DIRECTORY_SEPARATOR;
+
+      // Definição de ambiente
+      if ($credential->getEnviroment() == "PRODUCTION") {
+          $this->baseUrl = PHPixEnvironment::getProductionUrl().$this->VERSION;
+      } elseif ($credential->getEnviroment() == "SANDBOX") {
+          $this->baseUrl = PHPixEnvironment::getSandboxUrl().$this->VERSION;
+      } else {
+          throw new PHPixException('Environment not set');
+      }
+  }
 
   /**
   *
   */
-  public function __construct()
+  public function getVersion()
   {
-
+    return $this->VERSION;
   }
 
-  public static function getVersion()
-  {
-    return self::VERSION;
-  }
+   /**
+    * @return string
+    */
+   public function getBaseUrl()
+   {
+       return $this->baseUrl;
+   }
+
+   /**
+    * @param $url_path
+    * @return mixed
+    * @throws Exception
+    */
+   function get($url_path)
+   {
+       return $this->send($url_path, 'GET');
+   }
+
+   /**
+    * @param $url_path
+    * @param $params
+    * @return mixed
+    * @throws Exception
+    */
+   function post($url_path, $params)
+   {
+       return $this->send($url_path, 'POST', $params);
+   }
+
+   /**
+    * @param $url_path
+    * @param $params
+    * @return mixed
+    * @throws Exception
+    */
+   function put($url_path, $params)
+   {
+       return $this->send($url_path, 'PUT', $params);
+   }
+
+   /**
+    * @param $url_path
+    * @return string
+    */
+   private function getFullUrl($url_path)
+   {
+       if (stripos($url_path, $this->baseUrl, 0) === 0) {
+           return $url_path;
+       }
+
+       return $this->baseUrl . $url_path;
+   }
+
+   /**
+    * @param $url_path
+    * @param $method
+    * @param null $json
+    * @return mixed
+    * @throws Exception
+    */
+   private function send($url_path, $method, $json = NULL)
+   {
+
+       $response = "";
+       $curl = curl_init($this->getFullUrl($url_path));
+
+       $defaultCurlOptions = array(
+           CURLOPT_CONNECTTIMEOUT => 60,
+           CURLOPT_RETURNTRANSFER => true,
+           CURLOPT_TIMEOUT        => 60,
+           CURLOPT_HTTPHEADER     => array('Content-Type: application/json; charset=utf-8'),
+           CURLOPT_SSL_VERIFYHOST => 2,
+           CURLOPT_SSL_VERIFYPEER => 0
+       );
+
+       if ($method == 'POST') {
+           curl_setopt($curl, CURLOPT_POST, 1);
+           curl_setopt($curl, CURLOPT_POSTFIELDS, $json);
+       } elseif ($method == 'PUT') {
+           curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PUT');
+           curl_setopt($curl, CURLOPT_POSTFIELDS, $json);
+       } elseif ($method == 'GET') {
+           curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
+       }
+       curl_setopt($curl, CURLOPT_ENCODING, "");
+       curl_setopt_array($curl, $defaultCurlOptions);
+
+
+       try {
+           $response = curl_exec($curl);
+       } catch (Exception $e) {
+           print "ERROR1";
+       }
+       if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 500) {
+           throw new PHPixException("Internal Server Error", CURLINFO_HTTP_CODE);
+       }
+       if (curl_getinfo($curl, CURLINFO_HTTP_CODE) >= 400) {
+           throw new PHPixException(htmlentities(json_decode($response)->result->error->details), CURLINFO_HTTP_CODE);
+       }
+       if (!$response) {
+           print "URL ERROR";
+           EXIT;
+       }
+       curl_close($curl);
+
+       return json_decode($response, true);
+   }
 
 }

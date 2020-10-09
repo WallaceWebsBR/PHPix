@@ -23,6 +23,11 @@
 namespace PHPix;
 
 /**
+ * Uses
+ */
+use PHPix\PHPixException;
+
+/**
  * ------------------------------------------------------------------------
  * Autenticação
  * ------------------------------------------------------------------------
@@ -51,11 +56,68 @@ class PHPixAuthentication
 {
 
   /**
-  *
-  */
-  public function __construct()
-  {
+   * @var
+   */
+  private $signature;
 
+  /**
+   * @var
+   */
+  private $enviroment;
+
+
+  /**
+   * Credential constructor.
+   *
+   * @param $signature
+   * @param $enviroment
+   * @throws Exception
+   */
+  public function __construct($signature, $enviroment)
+  {
+      $this->setSignature($signature);
+      $this->setEnviroment($enviroment);
   }
+
+  /**
+   * @param $merchantId
+   * @return $this
+   * @throws Exception
+   */
+  public function setSignature($value)
+  {
+      if (!is_string($value)) {
+          throw new PHPixException('signature must be a string!');
+      }
+
+      $this->signature = $value;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getEnviroment()
+  {
+      return strtoupper($this->enviroment);
+  }
+
+  /**
+   * @param $env
+   * @return $this
+   * @throws Exception
+   */
+  public function setEnviroment($env)
+  {
+      $env = strtoupper($env);
+
+      if ($env != "SANDBOX" &&
+          $env != "PRODUCTION" &&
+          $env != "DEVELOP") {
+          throw new PHPixException('setEnv must be SANDBOX or PRODUCTION');
+      }
+
+      $this->enviroment = $env;
+  }
+
 
 }

@@ -29,8 +29,13 @@ class PHPixTest extends TestCase
 {
     public function testReturnVersion()
     {
-        $this->expectOutputString(PHPix\PHPix::getVersion());
-        print PHPix\PHPix::getVersion();
+        // classes
+        $PHPixAuthentication = new PHPix\PHPixAuthentication("0123654789654123","sandbox");
+        $PHPix = new PHPix\PHPix($PHPixAuthentication, "v1");
+
+        // testes
+        $this->expectOutputString($PHPix->getVersion());
+        print $PHPix->getVersion();
     }
 
 }

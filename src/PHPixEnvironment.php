@@ -23,53 +23,44 @@
 namespace PHPix;
 
 /**
- * Tratamento de erros
- * Fonte
- * https://www.bcb.gov.br/content/estabilidadefinanceira/pix/API_do_DICT-v1.0.html#section/Tratamento-de-erros
- *
- * O DICT retorna códigos de status HTTP para indicar sucesso ou falhas das
- * requisições. Códigos 2xx indicam sucesso. Códigos 4xx indicam falhas causadas
- * pelas informações enviadas pelo cliente ou pelo estado atual das entidades.
- * Códigos 5xx indicam problemas no serviço no lado do DICT.
- *
- * As respostas de erro incluem no corpo detalhes do erro seguindo o schema da
- * RFC Problem Details for HTTP APIs. O campo type identifica o tipo de erro e
- * no DICT segue o padrão: https://dict.pi.rsfn.net.br/api/v1/error/<TipoErro>
- */
-class PHPixException extends \Exception
+* Class Environment
+*
+* @package PHPix
+*/
+abstract class PHPixEnvironment
 {
+        /**
+         *
+         */
+        public const SANDBOX    = "SANDBOX";
+        /**
+         *
+         */
+        public const PRODUCTION = "PRODUCTION";
 
-  /**
-   *
-   */
-  private $customMessage;
+        /**
+         *
+         */
+        private const SANDBOX_URL = "https://dict-h.pi.rsfn.net.br:16522/api";
+        /**
+         *
+         */
+        private const PRODUCTION_URL = "https://dict.pi.rsfn.net.br:16422/api";
 
-  /**
-  *
-  */
-  public function __construct($customMessage)
-  {
-    $this->setCustomMessage($customMessage);
-  }
+        /**
+         * @return string
+         */
+        public static function getSandboxUrl()
+        {
+            return self::SANDBOX_URL;
+        }
 
-  /**
-   * Set message
-   *
-   * @return string
-   */
-  public function setCustomMessage($customMessage)
-  {
-      $this->customMessage = $customMessage;
-  }
-
-  /**
-   * Prettify error message output.
-   *
-   * @return string
-   */
-  public function errorMessage()
-  {
-      return $customMessage.' '.$this->getMessage();
-  }
+        /**
+         * @return string
+         */
+        public static function getProductionUrl()
+        {
+            return self::PRODUCTION_URL;
+        }
 
 }
